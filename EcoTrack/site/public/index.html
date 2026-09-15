@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EcoTrack - Personal Carbon Footprint Tracker</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Plus Jakarta Sans font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-tertiary-fixed-variant": "#005048",
+          "on-tertiary": "#ffffff",
+          "surface": "#f2fcf0",
+          "on-tertiary-fixed": "#00201c",
+          "background": "#f2fcf0",
+          "surface-container": "#e6f1e5",
+          "surface-bright": "#f2fcf0",
+          "outline": "#707a6f",
+          "on-primary-container": "#ceffd5",
+          "primary-fixed-dim": "#89d89c",
+          "surface-dim": "#d2ddd1",
+          "on-primary": "#ffffff",
+          "error": "#ba1a1a",
+          "on-secondary-fixed-variant": "#224f34",
+          "on-error-container": "#93000a",
+          "outline-variant": "#bfc9bd",
+          "secondary-fixed": "#bceeca",
+          "secondary": "#3b684b",
+          "on-secondary-container": "#3f6c4f",
+          "on-surface-variant": "#404940",
+          "on-tertiary-container": "#c4fff4",
+          "on-error": "#ffffff",
+          "primary-container": "#2f7d4a",
+          "tertiary": "#006258",
+          "surface-container-low": "#ecf6eb",
+          "tertiary-fixed": "#8cf5e4",
+          "surface-container-highest": "#dbe5da",
+          "surface-container-high": "#e1ebdf",
+          "primary-fixed": "#a4f5b6",
+          "on-primary-fixed-variant": "#005228",
+          "inverse-surface": "#29332b",
+          "on-surface": "#151e17",
+          "secondary-container": "#b9ebc7",
+          "on-background": "#151e17",
+          "surface-tint": "#1b6c3b",
+          "on-secondary-fixed": "#00210f",
+          "on-secondary": "#ffffff",
+          "error-container": "#ffdad6",
+          "primary": "#0d6434",
+          "surface-container-lowest": "#ffffff",
+          "inverse-on-surface": "#e9f4e8",
+          "tertiary-fixed-dim": "#6fd8c8",
+          "secondary-fixed-dim": "#a1d2af",
+          "on-primary-fixed": "#00210c",
+          "tertiary-container": "#007d71",
+          "surface-variant": "#dbe5da",
+          "inverse-primary": "#89d89c"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "space-sm": "0.5rem",
+          "gutter-desktop": "1.5rem",
+          "margin-desktop": "3rem",
+          "space-md": "1rem",
+          "margin-tablet": "2rem",
+          "space-lg": "1.5rem",
+          "margin": "1rem",
+          "space-xs": "0.25rem",
+          "space-xl": "2.25rem",
+          "gutter": "1.25rem"
+        },
+        "fontFamily": {
+          "sans": ["Inter", "sans-serif"],
+          "display": ["Plus Jakarta Sans", "sans-serif"],
+          "label-sm": ["Plus Jakarta Sans"],
+          "headline-sm": ["Plus Jakarta Sans"],
+          "body-sm": ["Plus Jakarta Sans"],
+          "display-sm": ["Plus Jakarta Sans"],
+          "headline-md": ["Plus Jakarta Sans"],
+          "label-md": ["Plus Jakarta Sans"],
+          "display-lg": ["Plus Jakarta Sans"],
+          "body-lg": ["Plus Jakarta Sans"],
+          "display-lg-mobile": ["Plus Jakarta Sans"],
+          "metric-stat": ["Plus Jakarta Sans"],
+          "headline-lg": ["Plus Jakarta Sans"],
+          "display-sm-mobile": ["Plus Jakarta Sans"],
+          "body-md": ["Plus Jakarta Sans"]
+        },
+        "fontSize": {
+          "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+          "headline-sm": ["18px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+          "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" }],
+          "display-sm": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.025em", "fontWeight": "700" }],
+          "headline-md": ["22px", { "lineHeight": "30px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+          "label-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+          "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+          "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400" }],
+          "display-lg-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.025em", "fontWeight": "800" }],
+          "metric-stat": ["32px", { "lineHeight": "38px", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+          "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+          "display-sm-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+          "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }]
+        }
+      }
+    }
+  }
+</script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+
+    /* Staggered fade in up animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in-up {
+      animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      opacity: 0;
+    }
+    .delay-100 { animation-delay: 100ms; }
+    .delay-200 { animation-delay: 200ms; }
+    .delay-300 { animation-delay: 300ms; }
+    .delay-400 { animation-delay: 400ms; }
+</style>
+</head>
+<body class="bg-[#FAFBF7] text-on-surface antialiased min-h-screen flex flex-col selection:bg-secondary-container selection:text-on-secondary-container font-sans">
+<!-- Side Navigation Anchor -->
+<aside class="fixed top-0 left-0 h-screen w-64 flex flex-col justify-between bg-white border-r border-[#EBECE5] z-30">
+<div class="p-5 flex flex-col gap-6">
+<!-- Brand Anchor Header -->
+<div class="flex items-center gap-3 px-2 py-1">
+<div class="w-9 h-9 rounded-xl bg-[#0D6434] flex items-center justify-center text-white shadow-sm">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-[17px] font-bold text-on-surface leading-tight tracking-tight font-display">EcoTrack</span>
+<span class="text-[12px] font-medium text-outline">Carbon Intelligence</span>
+</div>
+</div>
+<!-- Navigation Tabs Cluster -->
+<nav aria-label="Main Navigation" class="flex flex-col gap-1">
+<!-- Overview (ACTIVE) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-[#0D6434]/10 text-[#0D6434] font-medium text-[13.5px] transition-colors" href="#overview">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-semibold">Overview</span>
+</a>
+<!-- My Footprint -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-[#F2F4ED] font-medium text-[13.5px] transition-colors" href="#footprint">
+<span class="material-symbols-outlined text-[20px]">footprint</span>
+<span>My Footprint</span>
+</a>
+<!-- Missions (Renamed from Daily Habits) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-[#F2F4ED] font-medium text-[13.5px] transition-colors" href="#habits">
+<span class="material-symbols-outlined text-[20px]">task_alt</span>
+<span>Missions</span>
+</a>
+<!-- Challenges -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-[#F2F4ED] font-medium text-[13.5px] transition-colors" href="#challenges">
+<span class="material-symbols-outlined text-[20px]">emoji_events</span>
+<span>Challenges</span>
+</a>
+<!-- Insights -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-[#F2F4ED] font-medium text-[13.5px] transition-colors" href="#insights">
+<span class="material-symbols-outlined text-[20px]">insights</span>
+<span>Insights</span>
+</a>
+<!-- Achievements -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-[#F2F4ED] font-medium text-[13.5px] transition-colors" href="#achievements">
+<span class="material-symbols-outlined text-[20px]">military_tech</span>
+<span>Achievements</span>
+</a>
+</nav>
+</div>
+<!-- SideNav Bottom Anchor -->
+<div class="p-5 border-t border-[#EBECE5] flex flex-col gap-4">
+<!-- Mini user level summary badge -->
+<div class="px-3.5 py-3 rounded-xl bg-[#F6F7F2] border border-[#E9EBE1] flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-7 h-7 rounded-full bg-[#E8B931]/15 text-[#9E6E00] flex items-center justify-center">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+<div>
+<div class="text-[11px] font-bold uppercase tracking-wider text-primary">Level 8</div>
+<div class="text-[12.5px] font-semibold text-on-surface">Eco Pioneer</div>
+</div>
+</div>
+<span class="text-[11px] px-2 py-0.5 rounded-full bg-white text-on-surface-variant font-bold border border-[#E0E2D8]">2.4k XP</span>
+</div>
+<!-- Log Activity CTA (High-contrast Forest Green Button) -->
+<button class="w-full flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl bg-[#0D6434] text-white hover:bg-[#094c26] hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 font-medium text-[14px] shadow-sm tracking-wide">
+<span class="material-symbols-outlined text-[20px] font-semibold">add</span>
+<span class="font-semibold">Log Activity</span>
+</button>
+<!-- Footer navigation tabs -->
+<div class="flex flex-col gap-1 pt-0.5">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-outline hover:text-on-surface hover:bg-[#F2F4ED] text-[13px] font-medium transition-colors" href="#settings">
+<span class="material-symbols-outlined text-[18px]">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-outline hover:text-on-surface hover:bg-[#F2F4ED] text-[13px] font-medium transition-colors" href="#help">
+<span class="material-symbols-outlined text-[18px]">help</span>
+<span>Help &amp; FAQ</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Top Navigation Anchor -->
+<header class="fixed top-0 left-64 right-0 h-16 bg-white border-b border-[#EBECE5] z-20 flex items-center justify-between px-10">
+<!-- Search Bar on Left -->
+<div class="relative w-96">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-lg pointer-events-none">search</span>
+<input class="w-full pl-10 pr-12 py-2 text-body-md font-body-md bg-[#FAFBF7] border border-[#E0E2D8] rounded-xl focus:outline-none focus:border-[#0D6434] focus:ring-1 focus:ring-[#0D6434] placeholder:text-outline text-on-surface transition-colors" placeholder="Search activities, missions, insights..." type="text"/>
+<div class="absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center gap-0.5 px-1.5 py-0.5 rounded border border-[#E0E2D8] bg-white text-outline font-label-sm text-[10px]">
+<span>⌘</span><span>K</span>
+</div>
+</div>
+<!-- Trailing Action Set: Date, Notifications, User Avatar -->
+<div class="flex items-center gap-5">
+<!-- Today's Date Badge -->
+<div class="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#FAFBF7] border border-[#E0E2D8] text-on-surface-variant font-medium text-[12.5px]">
+<span class="material-symbols-outlined text-sm text-[#0D6434]">calendar_today</span>
+<span>Thursday, Oct 24</span>
+</div>
+<!-- Notification Action with activity dot -->
+<button aria-label="Notifications" class="relative p-2 rounded-xl text-on-surface-variant hover:bg-[#F2F4ED] transition-colors duration-150">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-[#0D6434] ring-2 ring-white"></span>
+</button>
+<div class="h-6 w-px bg-[#EBECE5]"></div>
+<!-- User Profile Avatar -->
+<div class="flex items-center gap-3 cursor-pointer group">
+<div class="relative p-0.5 rounded-full ring-2 ring-[#0D6434] bg-white">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="Close up modern portrait headshot of Alex Morgan with natural soft indoor studio lighting. Clean warm neutral atmosphere with modern botanical aesthetic and soft green accent colors." src="avatar.jpg"/>
+<div class="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-[#0D6434] ring-2 ring-white flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[8px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+<div class="flex flex-col text-left">
+<span class="font-semibold text-[13px] text-on-surface group-hover:text-[#0D6434] transition-colors leading-tight">Alex Morgan</span>
+<span class="text-[11px] text-outline">San Francisco, CA</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Editorial Canvas (Unboxed Layout) -->
+<main class="ml-64 mt-16 px-12 py-10 min-h-[calc(100vh-4rem)] flex flex-col gap-12 ">
+<!-- Header Greeting & Subtitle Area -->
+<section class="animate-fade-in-up flex flex-col md:flex-row md:items-baseline justify-between gap-4 pb-2 border-b border-[#EBECE5]">
+<div>
+<h1 class="text-3xl lg:text-4xl font-extrabold tracking-tight text-on-surface font-display">
+        Good morning, Alex <span class="inline-block hover:rotate-12 transition-transform cursor-default">👋</span>
+</h1>
+<p class="text-[15px] text-outline font-normal mt-1.5">Small actions. Measurable impact.</p>
+</div>
+<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EBF5EE] text-[#0D6434] font-medium text-[13px] self-start md:self-auto border border-[#CCE6D5]">
+<span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">public</span>
+<span>Top 15% in your neighborhood</span>
+</div>
+</section>
+<!-- Hero & Streak Section: Editorial, Unboxed Rhythm -->
+<section class="animate-fade-in-up delay-100 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+<!-- Hero Carbon Footprint (Editorial Flow, No Enclosing Box) -->
+<div class="lg:col-span-7 flex flex-col gap-6">
+<div class="flex items-center justify-between pb-3 border-b border-[#EBECE5]">
+<div class="flex items-center gap-2.5 text-[#0D6434]">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">co2</span>
+<span class="text-[12px] font-bold uppercase tracking-wider text-outline">Daily Telemetry</span>
+</div>
+<span class="text-[12px] font-medium text-outline">Budget ceiling: 6.0 kg</span>
+</div>
+<!-- Editorial Subhead and Big Stat -->
+<div class="flex flex-col gap-2">
+<p class="text-lg lg:text-xl font-medium text-[#0D6434] tracking-tight">You're lighter on the planet today.</p>
+<div class="flex flex-wrap items-baseline gap-3 pt-1">
+<span class="text-5xl lg:text-6xl font-extrabold tracking-tight text-on-surface leading-none font-display">4.8</span>
+<div class="flex flex-col">
+<span class="text-xl font-bold text-on-surface leading-tight">kg CO₂</span>
+<span class="text-[13px] text-outline">accumulated today</span>
+</div>
+</div>
+<p class="text-[14.5px] font-medium text-[#2F7D4A] mt-1 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base">eco</span>
+          Your choices today avoided 1.6 kg CO₂.
+        </p>
+</div>
+<!-- Benchmarks (Target Budget & 30d Average only - subtle, clean hairline cards) -->
+<div class="grid grid-cols-2 gap-4 pt-4 border-t border-[#EBECE5]">
+<div class="py-2 px-3 rounded-xl bg-white/70 border border-[#EBECE5] flex flex-col">
+<span class="text-[11px] uppercase tracking-wider font-semibold text-outline">Your 30d Avg</span>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="text-xl font-bold text-on-surface">5.4 kg</span>
+<span class="text-[12px] font-medium text-[#0D6434]">-0.6 kg today</span>
+</div>
+</div>
+<div class="py-2 px-3 rounded-xl bg-white/70 border border-[#EBECE5] flex flex-col">
+<span class="text-[11px] uppercase tracking-wider font-semibold text-outline">Target Budget</span>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="text-xl font-bold text-[#0D6434]">4.2 kg</span>
+<span class="text-[12px] font-medium text-outline">Stretch goal</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Side: Circular Gauge Progress + 7 Days Consistent Streak (Seamless, Unboxed) -->
+<div class="lg:col-span-5 flex flex-col sm:flex-row lg:flex-col gap-8 lg:border-l lg:border-[#EBECE5] lg:pl-10">
+<!-- Progress Indicator Composition -->
+<div class="flex items-center gap-6">
+<div class="relative w-28 h-28 shrink-0 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90" viewbox="0 0 120 120">
+<circle cx="60" cy="60" fill="none" r="50" stroke="#E6EAE2" stroke-width="8"></circle>
+<!-- 80% arc: 314.159 * 0.8 = 251.3 -->
+<circle class="transition-all duration-700 ease-out" cx="60" cy="60" fill="none" r="50" stroke="#0D6434" stroke-dasharray="314.159" stroke-dashoffset="62.83" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+<span class="text-2xl font-extrabold text-on-surface leading-none">80%</span>
+<span class="text-[11px] font-medium text-outline mt-0.5">budget</span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="text-[11px] uppercase tracking-wider font-bold text-[#0D6434]">Budget Envelope</span>
+<span class="text-[15px] font-semibold text-on-surface mt-0.5">4.8 of 6.0 kg consumed</span>
+<span class="text-[13px] text-outline mt-0.5">1.2 kg buffer remaining today</span>
+</div>
+</div>
+<div class="h-px bg-[#EBECE5] w-full"></div>
+<!-- Streak Section (Unboxed, Seamless) -->
+<div class="flex flex-col gap-3.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#E8B931] text-xl" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<h3 class="text-[17px] font-bold text-on-surface font-display">7 days consistent</h3>
+</div>
+<span class="text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#E8B931]/15 text-[#8F6200]">Active</span>
+</div>
+<!-- Visual Week Tracker (M T W T F S S) -->
+<div class="flex items-center justify-between pt-1">
+<!-- Mon: Done -->
+<div class="flex flex-col items-center gap-1.5">
+<span class="text-[11px] font-semibold text-outline">M</span>
+<div class="w-8 h-8 rounded-full bg-[#0D6434] text-white flex items-center justify-center text-xs shadow-xs">
+<span class="material-symbols-outlined text-sm font-bold">check</span>
+</div>
+</div>
+<!-- Tue: Done -->
+<div class="flex flex-col items-center gap-1.5">
+<span class="text-[11px] font-semibold text-outline">T</span>
+<div class="w-8 h-8 rounded-full bg-[#0D6434] text-white flex items-center justify-center text-xs shadow-xs">
+<span class="material-symbols-outlined text-sm font-bold">check</span>
+</div>
+</div>
+<!-- Wed: Done -->
+<div class="flex flex-col items-center gap-1.5">
+<span class="text-[11px] font-semibold text-outline">W</span>
+<div class="w-8 h-8 rounded-full bg-[#0D6434] text-white flex items-center justify-center text-xs shadow-xs">
+<span class="material-symbols-outlined text-sm font-bold">check</span>
+</div>
+</div>
+<!-- Thu (Today: Active current dot) -->
+<div class="flex flex-col items-center gap-1.5">
+<span class="text-[11px] font-bold text-[#0D6434]">T</span>
+<div class="w-8 h-8 rounded-full bg-[#E8B931] text-white flex items-center justify-center ring-4 ring-[#E8B931]/25 text-xs shadow-xs">
+<span class="material-symbols-outlined text-sm font-bold">bolt</span>
+</div>
+</div>
+<!-- Fri: Upcoming -->
+<div class="flex flex-col items-center gap-1.5">
+<span class="text-[11px] font-semibold text-outline">F</span>
+<div class="w-8 h-8 rounded-full border border-[#D5D8CF] text-outline flex items-center justify-center">
+<span class="w-1.5 h-1.5 rounded-full bg-[#D5D8CF]"></span>
+</div>
+</div>
+<!-- Sat: Upcoming -->
+<div class="flex flex-col items-center gap-1.5">
+<span class="text-[11px] font-semibold text-outline">S</span>
+<div class="w-8 h-8 rounded-full border border-[#D5D8CF] text-outline flex items-center justify-center">
+<span class="w-1.5 h-1.5 rounded-full bg-[#D5D8CF]"></span>
+</div>
+</div>
+<!-- Sun: Upcoming -->
+<div class="flex flex-col items-center gap-1.5">
+<span class="text-[11px] font-semibold text-outline">S</span>
+<div class="w-8 h-8 rounded-full border border-[#D5D8CF] text-outline flex items-center justify-center">
+<span class="w-1.5 h-1.5 rounded-full bg-[#D5D8CF]"></span>
+</div>
+</div>
+</div>
+<!-- Prominently featured motivating goal -->
+<div class="mt-2 py-2.5 px-3.5 rounded-xl bg-[#F6F7F2] border border-[#E9EBE1] flex items-center justify-between text-[13px]">
+<span class="font-semibold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-[#0D6434]">trending_up</span>
+            2 more days → Bronze Habit Streak
+          </span>
+<span class="text-[11px] font-bold text-[#8F6200] bg-[#E8B931]/20 px-2 py-0.5 rounded-full">+50 XP</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Hairline Divider -->
+<div class="h-px bg-[#EBECE5] w-full"></div>
+<!-- NEW SECTION: 🌱 Your Impact Garden -->
+<section class="animate-fade-in-up delay-200 flex flex-col gap-6">
+<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-3">
+<div>
+<div class="flex items-center gap-2">
+<h2 class="text-2xl font-bold tracking-tight text-on-surface font-display">🌱 Your Impact Garden</h2>
+<span class="text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#EBF5EE] text-[#0D6434] border border-[#CCE6D5]">Growing</span>
+</div>
+<p class="text-[14px] text-outline mt-1">Tangible transformation of your daily climate micro-choices over time.</p>
+</div>
+<!-- Prominent Stats -->
+<div class="flex items-center gap-3">
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#F4F7F2] border border-[#E3E8DD] text-on-surface">
+<span class="material-symbols-outlined text-[#0D6434] text-lg" style="font-variation-settings: 'FILL' 1;">park</span>
+<span class="text-[13.5px] font-semibold"><strong class="font-extrabold text-[#0D6434]">12 trees</strong> grown, <strong class="font-extrabold text-[#0D6434]">42 kg CO₂</strong> avoided</span>
+</div>
+</div>
+</div>
+<!-- Editorial Botanical Illustration Canvas -->
+<div class="relative w-full rounded-2xl overflow-hidden bg-[#FAFBF7] border border-[#EBECE5] flex flex-col items-center">
+<img alt="Minimalist elegant botanical illustration of an impact garden showing growth stages from a tiny seed to a delicate sprout, sapling, and flourishing mature green tree" class="w-full max-h-[360px] object-contain py-4 px-6 opacity-95 transition-opacity hover:opacity-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6bEqlcWesCVNiZybLln2WqS8Z-SGjiY-fMwIwxpBoqvB2CNZUg6qMEO0Yx3-8eaIXHaeBcjf8kigBomS40HnSF0n0c5Bml2m0xQZeEcmFXQWIM03c1ahI5TD5xpywkdv0mcC00wJzA7o8oXsf7hHSeolQ5Kf2XNEqm-vBUvBf8l2MPs1ZmXHq_e04bO9Ko4cEJOvGQPIype9lW0AbPlS6tdK35OKf6d8oymwka9iSf0htVaNRA8rG1ldgIVY5OqcOXfV6MKvDMRQ"/>
+<!-- Growth Stages Caption Track -->
+<div class="w-full grid grid-cols-4 border-t border-[#EAECE4] bg-white/75 backdrop-blur-xs py-3 px-6 text-center text-[12px]">
+<div class="flex flex-col items-center">
+<span class="font-bold text-on-surface">Seed</span>
+<span class="text-outline text-[11px]">First habit logged</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-bold text-on-surface">Sprout</span>
+<span class="text-outline text-[11px]">3-day consistency</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-bold text-on-surface">Sapling</span>
+<span class="text-outline text-[11px]">7-day milestone</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-bold text-[#0D6434]">Living Tree</span>
+<span class="text-[#2F7D4A] text-[11px] font-medium">Unlocked at 10 days</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Hairline Divider -->
+<div class="h-px bg-[#EBECE5] w-full"></div>
+<!-- Middle Section: Footprint DNA Breakdown (Unboxed, Editorial Hierarchy) -->
+<section class="animate-fade-in-up delay-300 flex flex-col gap-6">
+<!-- Header and Time Filter -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div>
+<div class="flex items-center gap-2.5">
+<h2 class="text-2xl font-bold tracking-tight text-on-surface font-display">Footprint DNA Breakdown</h2>
+<span class="px-2 py-0.5 rounded text-[11px] font-bold bg-[#EBF5EE] text-[#0D6434]">Live Composition</span>
+</div>
+<p class="text-[13.5px] text-outline mt-0.5">Real-time category breakdown of today's 4.8 kg CO₂ footprint</p>
+</div>
+<!-- Editorial Segmented Toggle -->
+<div class="inline-flex p-1 rounded-xl bg-[#F0F2EB] text-[13px] font-medium">
+<button class="px-3.5 py-1 rounded-lg bg-white text-[#0D6434] font-bold shadow-xs">Today</button>
+<button class="px-3.5 py-1 rounded-lg text-outline hover:text-on-surface transition-colors">This Week</button>
+<button class="px-3.5 py-1 rounded-lg text-outline hover:text-on-surface transition-colors">This Month</button>
+</div>
+</div>
+<!-- Continuous Segmented DNA Bar Visualization -->
+<div class="flex flex-col gap-2">
+<div class="h-3 w-full rounded-full overflow-hidden bg-[#E8ECE4] flex gap-0.5">
+<!-- Transport (38%) -->
+<div class="h-full bg-[#0D6434] rounded-full transition-all duration-500 relative group" style="width: 38%;">
+<div class="hidden group-hover:block absolute -top-8 left-1/2 -translate-x-1/2 bg-[#151E17] text-white text-[11px] font-bold px-2 py-0.5 rounded z-10 whitespace-nowrap">
+            Transport: 1.82 kg (38%)
+          </div>
+</div>
+<!-- Energy (24%) -->
+<div class="h-full bg-[#2A9D8F] rounded-full transition-all duration-500 relative group" style="width: 24%;">
+<div class="hidden group-hover:block absolute -top-8 left-1/2 -translate-x-1/2 bg-[#151E17] text-white text-[11px] font-bold px-2 py-0.5 rounded z-10 whitespace-nowrap">
+            Energy: 1.15 kg (24%)
+          </div>
+</div>
+<!-- Food (18%) -->
+<div class="h-full bg-[#629E6C] rounded-full transition-all duration-500 relative group" style="width: 18%;">
+<div class="hidden group-hover:block absolute -top-8 left-1/2 -translate-x-1/2 bg-[#151E17] text-white text-[11px] font-bold px-2 py-0.5 rounded z-10 whitespace-nowrap">
+            Food: 0.86 kg (18%)
+          </div>
+</div>
+<!-- Shopping (12%) -->
+<div class="h-full bg-[#E8B931] rounded-full transition-all duration-500 relative group" style="width: 12%;">
+<div class="hidden group-hover:block absolute -top-8 left-1/2 -translate-x-1/2 bg-[#151E17] text-white text-[11px] font-bold px-2 py-0.5 rounded z-10 whitespace-nowrap">
+            Shopping: 0.58 kg (12%)
+          </div>
+</div>
+<!-- Other (8%) -->
+<div class="h-full bg-[#9DA8B5] rounded-full transition-all duration-500 relative group" style="width: 8%;">
+<div class="hidden group-hover:block absolute -top-8 left-1/2 -translate-x-1/2 bg-[#151E17] text-white text-[11px] font-bold px-2 py-0.5 rounded z-10 whitespace-nowrap">
+            Other: 0.39 kg (8%)
+          </div>
+</div>
+</div>
+<div class="flex justify-between items-center text-[11.5px] text-outline font-medium px-0.5">
+<span>0.0 kg</span>
+<span>Budget Ceiling 6.0 kg</span>
+</div>
+</div>
+<!-- Editorial Category Data Columns (No heavy cards, delicate bottom borders) -->
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 pt-2">
+<!-- Transport -->
+<div class="flex flex-col pb-3 border-b-2 border-[#0D6434]">
+<div class="flex items-center justify-between text-[12px] font-semibold text-outline">
+<span>🚌 Transport</span>
+<span class="font-bold text-[#0D6434]">38%</span>
+</div>
+<span class="text-2xl font-bold text-on-surface mt-2 tracking-tight">1.82 <span class="text-sm font-normal text-outline">kg</span></span>
+<span class="text-[12px] text-outline mt-0.5">Metrorail commute</span>
+</div>
+<!-- Energy -->
+<div class="flex flex-col pb-3 border-b-2 border-[#2A9D8F]">
+<div class="flex items-center justify-between text-[12px] font-semibold text-outline">
+<span>⚡ Energy</span>
+<span class="font-bold text-[#2A9D8F]">24%</span>
+</div>
+<span class="text-2xl font-bold text-on-surface mt-2 tracking-tight">1.15 <span class="text-sm font-normal text-outline">kg</span></span>
+<span class="text-[12px] text-outline mt-0.5">Solar offset active</span>
+</div>
+<!-- Food -->
+<div class="flex flex-col pb-3 border-b-2 border-[#629E6C]">
+<div class="flex items-center justify-between text-[12px] font-semibold text-outline">
+<span>🥗 Food</span>
+<span class="font-bold text-[#629E6C]">18%</span>
+</div>
+<span class="text-2xl font-bold text-on-surface mt-2 tracking-tight">0.86 <span class="text-sm font-normal text-outline">kg</span></span>
+<span class="text-[12px] text-outline mt-0.5">Plant-based meal</span>
+</div>
+<!-- Shopping -->
+<div class="flex flex-col pb-3 border-b-2 border-[#E8B931]">
+<div class="flex items-center justify-between text-[12px] font-semibold text-outline">
+<span>🛍️ Shopping</span>
+<span class="font-bold text-[#8F6200]">12%</span>
+</div>
+<span class="text-2xl font-bold text-on-surface mt-2 tracking-tight">0.58 <span class="text-sm font-normal text-outline">kg</span></span>
+<span class="text-[12px] text-outline mt-0.5">Local grocery bag</span>
+</div>
+<!-- Other -->
+<div class="flex flex-col pb-3 border-b-2 border-[#9DA8B5]">
+<div class="flex items-center justify-between text-[12px] font-semibold text-outline">
+<span>📦 Other</span>
+<span class="font-bold text-[#9DA8B5]">8%</span>
+</div>
+<span class="text-2xl font-bold text-on-surface mt-2 tracking-tight">0.39 <span class="text-sm font-normal text-outline">kg</span></span>
+<span class="text-[12px] text-outline mt-0.5">Digital services</span>
+</div>
+</div>
+</section>
+<!-- Hairline Divider -->
+<div class="h-px bg-[#EBECE5] w-full"></div>
+<!-- Today's Missions (Restructured: Open, Floating, Seamless Coupling of Action, CO2, XP) -->
+<section class="animate-fade-in-up delay-400 flex flex-col gap-6 pb-8">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-[#EBECE5]">
+<div>
+<div class="flex items-center gap-2.5">
+<h2 class="text-2xl font-bold tracking-tight text-on-surface font-display">Today's Missions</h2>
+<span class="px-2.5 py-0.5 rounded-full bg-[#EBF5EE] text-[#0D6434] text-[11px] font-bold">Resets at midnight</span>
+</div>
+<p class="text-[13.5px] text-outline mt-0.5">Actionable micro-choices to actively cut carbon and earn XP.</p>
+</div>
+<!-- Progress & XP status -->
+<div class="flex items-center gap-5">
+<div class="flex items-center gap-2 text-[13px] font-medium text-outline">
+<span>Progress: <strong class="text-on-surface font-bold">3 of 5</strong> completed</span>
+</div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E8B931]/15 text-[#8F6200] font-bold text-[12px]">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span>+120 XP available</span>
+</div>
+</div>
+</div>
+<!-- Floating List of Missions (Delicate divider rows, open editorial style) -->
+<div class="flex flex-col divide-y divide-[#EBECE5]">
+<!-- Mission 1: Completed -->
+<div class="py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-[#0D6434] text-white flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-xl font-bold">check</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2.5">
+<span class="text-[15px] font-semibold text-on-surface line-through opacity-70">Take public transit</span>
+<span class="px-2 py-0.5 rounded text-[10.5px] font-bold bg-[#EBF5EE] text-[#0D6434]">Completed</span>
+</div>
+<span class="text-[13px] text-outline mt-0.5">Avoided <strong class="text-[#0D6434] font-semibold">~1.4 kg CO₂</strong> on the morning commute</span>
+</div>
+</div>
+<div class="flex items-center gap-3 self-end sm:self-center">
+<span class="text-[12px] font-bold text-[#0D6434] px-2.5 py-1 rounded-full bg-[#EBF5EE] border border-[#CCE6D5]">+40 XP</span>
+<button class="px-3.5 py-1.5 rounded-full bg-[#0D6434]/10 text-[#0D6434] font-semibold text-[13px] cursor-default flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">done_all</span>
+<span>Done</span>
+</button>
+</div>
+</div>
+<!-- Mission 2: Plant-based lunch -->
+<div class="py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-colors hover:bg-white/60 hover:-translate-y-0.5 hover:shadow-sm">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-[#F2F5ED] text-[#2F7D4A] border border-[#E0E2D8] flex items-center justify-center shrink-0 text-lg">
+            🥗
+          </div>
+<div class="flex flex-col">
+<span class="text-[15px] font-semibold text-on-surface">Plant-based lunch</span>
+<span class="text-[13px] text-outline mt-0.5">Avoids <strong class="text-on-surface font-semibold">~0.9 kg CO₂</strong> vs dairy &amp; meat</span>
+</div>
+</div>
+<div class="flex items-center gap-3 self-end sm:self-center">
+<span class="text-[12px] font-bold text-[#8F6200] px-2.5 py-1 rounded-full bg-[#E8B931]/15">+30 XP</span>
+<button class="px-4 py-1.5 rounded-full border border-outline hover:border-[#0D6434] hover:bg-[#0D6434] hover:text-white transition-all text-on-surface font-semibold text-[13px] active:scale-95">
+            Mark Complete
+          </button>
+</div>
+</div>
+<!-- Mission 3: Cold water laundry cycle -->
+<div class="py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-colors hover:bg-white/60 hover:-translate-y-0.5 hover:shadow-sm">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-[#F2F5ED] text-teal-700 border border-[#E0E2D8] flex items-center justify-center shrink-0 text-lg">
+            🧺
+          </div>
+<div class="flex flex-col">
+<span class="text-[15px] font-semibold text-on-surface">Cold water laundry cycle</span>
+<span class="text-[13px] text-outline mt-0.5">Avoids <strong class="text-on-surface font-semibold">~0.4 kg CO₂</strong> heating energy</span>
+</div>
+</div>
+<div class="flex items-center gap-3 self-end sm:self-center">
+<span class="text-[12px] font-bold text-[#8F6200] px-2.5 py-1 rounded-full bg-[#E8B931]/15">+15 XP</span>
+<button class="px-4 py-1.5 rounded-full border border-outline hover:border-[#0D6434] hover:bg-[#0D6434] hover:text-white transition-all text-on-surface font-semibold text-[13px] active:scale-95">
+            Mark Complete
+          </button>
+</div>
+</div>
+<!-- Mission 4: Smart power strip shutoff -->
+<div class="py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-colors hover:bg-white/60 hover:-translate-y-0.5 hover:shadow-sm">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-[#F2F5ED] text-amber-700 border border-[#E0E2D8] flex items-center justify-center shrink-0 text-lg">
+            🔌
+          </div>
+<div class="flex flex-col">
+<span class="text-[15px] font-semibold text-on-surface">Smart power strip shutoff</span>
+<span class="text-[13px] text-outline mt-0.5">Avoids <strong class="text-on-surface font-semibold">~0.3 kg CO₂</strong> phantom vampire load</span>
+</div>
+</div>
+<div class="flex items-center gap-3 self-end sm:self-center">
+<span class="text-[12px] font-bold text-[#8F6200] px-2.5 py-1 rounded-full bg-[#E8B931]/15">+15 XP</span>
+<button class="px-4 py-1.5 rounded-full border border-outline hover:border-[#0D6434] hover:bg-[#0D6434] hover:text-white transition-all text-on-surface font-semibold text-[13px] active:scale-95">
+            Mark Complete
+          </button>
+</div>
+</div>
+</div>
+<!-- Editorial Footer Callout -->
+<div class="pt-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-[13.5px]">
+<div class="flex items-center gap-2 text-outline">
+<span class="material-symbols-outlined text-base text-[#0D6434]">workspace_premium</span>
+<span>Complete 1 more mission today to achieve the <strong>Bronze Habit Streak</strong> badge.</span>
+</div>
+<a class="text-[#0D6434] font-bold hover:underline inline-flex items-center gap-1 text-[13.5px]" href="#habits">
+<span>View all 12 habits</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</section>
+</main>
+</body></html>

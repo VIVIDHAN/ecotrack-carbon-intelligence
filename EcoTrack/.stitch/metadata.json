@@ -1,0 +1,27 @@
+{
+  "name": "projects/7264069635892050163",
+  "projectId": "7264069635892050163",
+  "title": "EcoTrack",
+  "visibility": "PRIVATE",
+  "projectType": "PROJECT_DESIGN",
+  "origin": "STITCH",
+  "deviceType": "DESKTOP",
+  "screens": {
+    "index": {
+      "id": "0b0b925865e44b05b1322d583901c9cb",
+      "sourceScreen": "projects/7264069635892050163/screens/0b0b925865e44b05b1322d583901c9cb",
+      "x": 0,
+      "y": 0,
+      "width": 2560,
+      "height": 4288
+    },
+    "impact_garden_illustration": {
+      "id": "7ec2f1ff9e98477b84eb2f2e49032938",
+      "sourceScreen": "projects/7264069635892050163/screens/7ec2f1ff9e98477b84eb2f2e49032938",
+      "x": 2600,
+      "y": 0,
+      "width": 1376,
+      "height": 768
+    }
+  }
+}
